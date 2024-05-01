@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <gazebo reference="base_link" >
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference="right_wheel_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <gazebo reference="left_wheel_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <gazebo reference="caster_wheel_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <!-- we are added new plugin ros difference driver -->
+    <gazebo>
+        <plugin name="diff_drive_control" filename="libgazebo_ros_diff_drive.so">
+
+            <!-- Update rate in Hz -->
+            <update_rate>50</update_rate>
+
+            <!-- wheels -->
+            <!-- burada bizim sahip olduğumuz jointleri ekledik bunların isimlerini-->
+            <left_joint>base_left_wheel_joint</left_joint>
+            <right_joint>base_right_wheel_joint</right_joint>
+        
+            <!-- kinematics -->
+            <!-- tekerlekler arasındaki mesafelerle ilgili burada kendi mesafelerimizi ekleriz bizdeki base_length ve base_width toplamıdır bunlar wheel_diameter değeri ise bizim wheel_radius değerimizdir -->
+            <wheel_separation>0.45</wheel_separation>
+            <wheel_diameter>0.2</wheel_diameter>
+
+            <!-- output -->
+            <!-- burada odom versinin publish edilmesini bize anlatıyor -->
+            <!-- aşşağıda robot_base_frame kısmında kendi base_footprint imizi ekledik bunun endeni odom verisinin nereden başlıyacağını biz söylemiş olduk. -->
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
+
+            <odometry_topic>odom</odometry_topic>
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_footprint</robot_base_frame>
+
+        </plugin>
+    </gazebo>
+
+</robot>
