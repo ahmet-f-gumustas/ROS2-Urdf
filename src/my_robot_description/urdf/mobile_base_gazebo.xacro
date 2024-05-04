@@ -15,6 +15,8 @@
 
     <gazebo reference="caster_wheel_link">
         <material>Gazebo/Grey</material>
+        <mul value="0.1" />
+        <mu2 value="0.1" />
     </gazebo>
 
     <!-- we are added new plugin ros difference driver -->
